@@ -5,3 +5,5 @@ __MACOSX/
 .env
 .quoteforge/
 dist/
+packages/
+build-packages.sh
