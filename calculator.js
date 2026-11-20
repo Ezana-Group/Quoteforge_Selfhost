@@ -4083,9 +4083,9 @@ function refreshHeaderBranding() {
       mark.style.background = "transparent";
       mark.style.boxShadow = "none";
     } else {
-      mark.innerHTML = "3D";
-      mark.style.background = "";
-      mark.style.boxShadow = "";
+      mark.innerHTML = `<img src="icons/icon.png" alt="QuoteForge" style="width: 100%; height: 100%; object-fit: contain; border-radius: inherit;" />`;
+      mark.style.background = "transparent";
+      mark.style.boxShadow = "none";
     }
   }
   if (eyebrow) {
