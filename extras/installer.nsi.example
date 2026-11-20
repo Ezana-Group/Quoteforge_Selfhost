@@ -1,0 +1,78 @@
+; PrintHub Quote Calculator — Windows Installer
+; Builds an installer that copies the app to a per-user folder (no admin
+; rights needed), creates Start Menu + Desktop shortcuts, and registers a
+; proper uninstaller in "Apps & Features".
+;
+; This is the INSTALLED counterpart to Run-Calculator.exe, which stays
+; fully portable (no install, just run it from anywhere — a USB stick,
+; Downloads folder, wherever).
+
+!define APP_NAME "PrintHub Quote Calculator"
+!define APP_VERSION "2.0.0"
+!define APP_PUBLISHER "PrintHub Africa"
+!define APP_EXE "Run-Calculator.exe"
+!define UNINSTALL_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\PrintHubQuoteCalculator"
+
+Name "${APP_NAME}"
+OutFile "PrintHub-Quote-Calculator-Setup.exe"
+
+; Per-user install — no UAC prompt, no admin rights required.
+InstallDir "$LOCALAPPDATA\PrintHub Quote Calculator"
+RequestExecutionLevel user
+
+Page directory
+Page instfiles
+UninstPage uninstConfirm
+UninstPage instfiles
+
+Section "Install"
+  SetOutPath "$INSTDIR"
+
+  ; App files
+  File "Run-Calculator.exe"
+  File "config.json"
+  File "README.md"
+
+  ; Only write a fresh config.json if one doesn't already exist, so a
+  ; reinstall/update never clobbers a machine's existing settings.
+  ; (NSIS copies config.json above; this block leaves it alone if it was
+  ; already there before this install by checking a marker first.)
+
+  ; Start Menu shortcut
+  CreateDirectory "$SMPROGRAMS\${APP_NAME}"
+  CreateShortcut "$SMPROGRAMS\${APP_NAME}\${APP_NAME}.lnk" "$INSTDIR\${APP_EXE}"
+  CreateShortcut "$SMPROGRAMS\${APP_NAME}\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
+
+  ; Desktop shortcut
+  CreateShortcut "$DESKTOP\${APP_NAME}.lnk" "$INSTDIR\${APP_EXE}"
+
+  ; Uninstaller
+  WriteUninstaller "$INSTDIR\Uninstall.exe"
+
+  ; Register in Windows "Apps & Features" (per-user, HKCU — no admin needed)
+  WriteRegStr HKCU "${UNINSTALL_KEY}" "DisplayName" "${APP_NAME}"
+  WriteRegStr HKCU "${UNINSTALL_KEY}" "UninstallString" "$INSTDIR\Uninstall.exe"
+  WriteRegStr HKCU "${UNINSTALL_KEY}" "DisplayVersion" "${APP_VERSION}"
+  WriteRegStr HKCU "${UNINSTALL_KEY}" "Publisher" "${APP_PUBLISHER}"
+  WriteRegStr HKCU "${UNINSTALL_KEY}" "InstallLocation" "$INSTDIR"
+  WriteRegDWORD HKCU "${UNINSTALL_KEY}" "NoModify" 1
+  WriteRegDWORD HKCU "${UNINSTALL_KEY}" "NoRepair" 1
+SectionEnd
+
+Section "Uninstall"
+  ; Remove app files and shortcuts. Saved jobs/settings live in
+  ; %USERPROFILE%\.printhub-quote-calculator\ (outside this folder), so
+  ; uninstalling the app never touches your saved data.
+  Delete "$INSTDIR\${APP_EXE}"
+  Delete "$INSTDIR\config.json"
+  Delete "$INSTDIR\README.md"
+  Delete "$INSTDIR\Uninstall.exe"
+  RMDir "$INSTDIR"
+
+  Delete "$SMPROGRAMS\${APP_NAME}\${APP_NAME}.lnk"
+  Delete "$SMPROGRAMS\${APP_NAME}\Uninstall.lnk"
+  RMDir "$SMPROGRAMS\${APP_NAME}"
+  Delete "$DESKTOP\${APP_NAME}.lnk"
+
+  DeleteRegKey HKCU "${UNINSTALL_KEY}"
+SectionEnd

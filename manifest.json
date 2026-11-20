@@ -1,0 +1,40 @@
+{
+  "name": "QuoteForge Pro",
+  "short_name": "QuoteForge",
+  "description": "Self-hostable 3D printing quote calculator — works offline, no cloud required.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#ffffff",
+  "theme_color": "#1a1a2e",
+  "categories": ["business", "productivity"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/docs/screenshots/quote.png",
+      "sizes": "1280x800",
+      "type": "image/png",
+      "label": "Quote calculator"
+    },
+    {
+      "src": "/docs/screenshots/jobs.png",
+      "sizes": "1280x800",
+      "type": "image/png",
+      "label": "Job history"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+services:
+  quoteforge:
+    build: .
+    container_name: quoteforge
+    ports:
+      - "8080:8080"
+    # Uncomment the next line (and remove the "ports" section above) if you
+    # want the built-in network printer discovery (Settings → Add Printer →
+    # Scan Network) to actually see printers on your LAN. With the default
+    # Docker bridge network, the container is on its own isolated network
+    # and can't see your home/office LAN — host networking fixes that at
+    # the cost of Docker's usual port isolation.
+    # network_mode: host
+    volumes:
+      # Named volume — your jobs, materials, printers, and settings live
+      # here and survive `docker compose down` / rebuilds / upgrades.
+      - quoteforge-data:/data
+    restart: unless-stopped
+    # QuoteForge has no login of its own. Before exposing it beyond a trusted
+    # network, set a password (HTTP Basic auth; username defaults to
+    # "quoteforge") — and put HTTPS in front of it, since Basic auth sends the
+    # password unencrypted over plain HTTP.
+    # environment:
+    #   QUOTEFORGE_PASSWORD: "choose-a-long-password"
+    #   QUOTEFORGE_USER: "quoteforge"
+
+volumes:
+  quoteforge-data:

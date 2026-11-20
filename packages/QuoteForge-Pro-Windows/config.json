@@ -1,0 +1,70 @@
+{
+  "setupComplete": false,
+  "currencyCode": "",
+  "currencyLocale": "",
+  "nextInvoiceNumber": 1,
+  "invoiceDueDays": 7,
+  "googleSheetsWebhookUrl": "",
+  "googleSheetsAutoSync": false,
+  "serviceMinimumOrderKes": 0,
+  "vatRatePercent": 0,
+  "taxLabel": "VAT",
+  "profitMarginPercent": 40,
+  "minChargeGrams": 10,
+  "categories": [],
+  "defaultMaterialDensity": 1.24,
+  "defaultMachineRate": 0,
+  "postProcessingFeePerUnit": 0,
+  "supportRemovalOptions": [
+    {
+      "code": "NONE",
+      "name": "None",
+      "pricePerUnit": 0
+    }
+  ],
+  "finishingOptions": [
+    {
+      "code": "FINISH_RAW",
+      "name": "Raw finish",
+      "pricePerUnit": 0
+    }
+  ],
+  "rushOptions": [
+    {
+      "code": "STD",
+      "name": "Standard",
+      "surchargePercent": 0
+    },
+    {
+      "code": "EXPRESS",
+      "name": "Express",
+      "surchargePercent": 40
+    }
+  ],
+  "materials": [],
+  "printerSettings": {
+    "printerModel": "",
+    "powerWatts": 0,
+    "electricityRateKesKwh": 0,
+    "printerPurchasePriceKes": 0,
+    "lifespanHours": 10000,
+    "maintenancePerYearKes": 0,
+    "laborRateKesPerHour": 0,
+    "postProcessingTimeHours": 0.5,
+    "monthlyRentKes": 0,
+    "monthlyUtilitiesKes": 0,
+    "monthlyInsuranceKes": 0,
+    "workingDaysPerMonth": 26,
+    "workingHoursPerDay": 8,
+    "failedPrintRatePercent": 5,
+    "packagingCostKes": 0,
+    "profitMarginPercent": 40,
+    "vatRatePercent": 0,
+    "plannedUtilizationPercent": 100,
+    "customFacilityMetrics": [],
+    "customPricingMetrics": []
+  },
+  "materialWasteBufferPercent": 0,
+  "materialFxBufferPercent": 0,
+  "bulkDiscountTiers": []
+}
