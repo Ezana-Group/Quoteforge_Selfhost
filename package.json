@@ -21,7 +21,7 @@
   "license": "AGPL-3.0-only",
   "type": "commonjs",
   "optionalDependencies": {
-    "mqtt": "^5.15.2"
+    "mqtt": "^5.16.1"
   },
   "devDependencies": {
     "jsdom": "^24.1.3"
